@@ -14,6 +14,20 @@ class MealTableViewController: UITableViewController {
     //MARK: Properties
     var meals = [Meal]()
     
+    //MARK: viewDidAppear
+    override func viewDidAppear(_ animated: Bool) {
+        let defaultUsers = UserDefaults.standard
+        
+        let newDictionary = defaultUsers.object(forKey: "user") as! NSMutableDictionary
+        
+        let newToken = newDictionary.object(forKey: "token") as? String
+        
+        if(newToken == nil){
+            performSegue(withIdentifier: "SignUp", sender: self)
+        }else{
+            print(newToken ?? "")
+        }
+    }
     
     //MARK: ViewDidLoad
     override func viewDidLoad() {

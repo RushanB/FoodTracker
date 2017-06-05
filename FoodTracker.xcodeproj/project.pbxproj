@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		317047ED1EE5C97200A5548C /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317047EC1EE5C97200A5548C /* SignUpViewController.swift */; };
+		317047EF1EE5C97E00A5548C /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317047EE1EE5C97E00A5548C /* LogInViewController.swift */; };
+		317047F11EE5CF1000A5548C /* CloudTrackerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317047F01EE5CF1000A5548C /* CloudTrackerAPI.swift */; };
 		317B95B71EE4A5D0002F8A73 /* MealTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317B95B61EE4A5D0002F8A73 /* MealTableViewCell.swift */; };
 		317B95B91EE4B1AC002F8A73 /* MealTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317B95B81EE4B1AC002F8A73 /* MealTableViewController.swift */; };
 		31B05CF01EE28BBC00F6D1CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B05CEF1EE28BBC00F6D1CF /* AppDelegate.swift */; };
@@ -30,6 +33,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		317047EC1EE5C97200A5548C /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		317047EE1EE5C97E00A5548C /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogInViewController.swift; path = ../LogInViewController.swift; sourceTree = "<group>"; };
+		317047F01EE5CF1000A5548C /* CloudTrackerAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudTrackerAPI.swift; sourceTree = "<group>"; };
 		317B95B61EE4A5D0002F8A73 /* MealTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealTableViewCell.swift; sourceTree = "<group>"; };
 		317B95B81EE4B1AC002F8A73 /* MealTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealTableViewController.swift; sourceTree = "<group>"; };
 		31B05CEC1EE28BBC00F6D1CF /* FoodTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,6 +97,9 @@
 				31B05D111EE3EB6200F6D1CF /* Meal.swift */,
 				317B95B61EE4A5D0002F8A73 /* MealTableViewCell.swift */,
 				317B95B81EE4B1AC002F8A73 /* MealTableViewController.swift */,
+				317047EC1EE5C97200A5548C /* SignUpViewController.swift */,
+				317047EE1EE5C97E00A5548C /* LogInViewController.swift */,
+				317047F01EE5CF1000A5548C /* CloudTrackerAPI.swift */,
 				31B05CF31EE28BBC00F6D1CF /* Main.storyboard */,
 				31B05CF61EE28BBC00F6D1CF /* Assets.xcassets */,
 				31B05CF81EE28BBC00F6D1CF /* LaunchScreen.storyboard */,
@@ -213,8 +222,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				31B05D121EE3EB6200F6D1CF /* Meal.swift in Sources */,
+				317047ED1EE5C97200A5548C /* SignUpViewController.swift in Sources */,
 				31B05CF21EE28BBC00F6D1CF /* ViewController.swift in Sources */,
 				31B05D101EE3C72500F6D1CF /* RatingControl.swift in Sources */,
+				317047EF1EE5C97E00A5548C /* LogInViewController.swift in Sources */,
+				317047F11EE5CF1000A5548C /* CloudTrackerAPI.swift in Sources */,
 				31B05CF01EE28BBC00F6D1CF /* AppDelegate.swift in Sources */,
 				317B95B91EE4B1AC002F8A73 /* MealTableViewController.swift in Sources */,
 				317B95B71EE4A5D0002F8A73 /* MealTableViewCell.swift in Sources */,

@@ -24,7 +24,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     var meal: Meal?
     
     
-    
     //MARK: viewLoad
     override func viewDidLoad() {
         super.viewDidLoad()
