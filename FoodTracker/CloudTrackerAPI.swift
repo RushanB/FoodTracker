@@ -11,7 +11,7 @@ import UIKit
 class CloudTrackerAPI: NSObject {
     
     //MARK: URL String
-    let url = URL(string: "http://159.203.243.24:8000/")!
+    let url = URL(string: "http://159.203.243.24:8000")!
     
     
     //MARK: Method to append URL

@@ -14,21 +14,6 @@ class MealTableViewController: UITableViewController {
     //MARK: Properties
     var meals = [Meal]()
     
-    //MARK: viewDidAppear
-    override func viewDidAppear(_ animated: Bool) {
-        let defaultUsers = UserDefaults.standard
-        
-        let newDictionary = defaultUsers.object(forKey: "user") as! NSMutableDictionary
-        
-        let newToken = newDictionary.object(forKey: "token") as? String
-        
-        if(newToken == nil){
-            performSegue(withIdentifier: "SignUp", sender: self)
-        }else{
-            print(newToken ?? "")
-        }
-    }
-    
     //MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +29,22 @@ class MealTableViewController: UITableViewController {
             loadSampleMeals()
         }
     }
+    
+    //MARK: viewDidAppear
+    override func viewDidAppear(_ animated: Bool) {
+        let defaultUsers = UserDefaults.standard
+        
+        let newDictionary = defaultUsers.object(forKey: "user") as! NSMutableDictionary
+        
+        let newToken = newDictionary.object(forKey: "token") as? String
+        
+        if(newToken == nil){
+            performSegue(withIdentifier: "SignUp", sender: self)
+        }else{
+            print(newToken ?? "")
+        }
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -76,6 +77,7 @@ class MealTableViewController: UITableViewController {
         cell.nameLabel.text = meal.name
         cell.photoImageView.image = meal.photo
         cell.ratingControl.rating = meal.rating
+        cell.caloriesLabel.text = String(meal.calories)
         
         return cell
     }
@@ -158,15 +160,18 @@ class MealTableViewController: UITableViewController {
         let photo3 = UIImage(named: "meal3")
         
         //create three meal objects
-        guard let meal1 = Meal(name: "Caprese Salad", photo: photo1, rating: 4) else{
+        guard let meal1 = Meal(name: "Caprese Salad", photo: photo1, rating: 1, calories: 520, foodDescription: "I hate salads.")
+            else{
             fatalError("Unable to instantiate meal1")
             
         }
-        guard let meal2 = Meal(name: "Chicken and Potatoes", photo: photo2, rating: 5) else {
+        guard let meal2 = Meal(name: "Chicken and Potatoes", photo: photo2, rating: 5, calories: 890, foodDescription: "I love chicken omg so amazing.")
+            else {
             fatalError("Unable to instantiate meal2")
         }
         
-        guard let meal3 = Meal(name: "Pasta with Meatballs", photo: photo3, rating: 3) else {
+        guard let meal3 = Meal(name: "Pasta with Meatballs", photo: photo3, rating: 3, calories: 650, foodDescription: "It was alright...")
+            else {
             fatalError("Unable to instantiate meal2")
         }
         
