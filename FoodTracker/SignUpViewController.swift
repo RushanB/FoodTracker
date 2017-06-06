@@ -16,11 +16,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var warningLabel: UILabel!
     
-    //MARK: CloudTracker
-    let cloudTracker = CloudTrackerAPI()
-    let urlString = "signup"
-
-    
     //MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +27,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //hide the keyboard
         usernameTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
         return true
@@ -39,41 +35,44 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: Actions
     @IBAction func signUpTapped(_ sender: UIButton) { //sign up should be valid
-        guard let password = passwordTextField.text
-            else{
-                warningLabel.text = "Not a valid password."
-                warningLabel.isHidden = false
-                return
+        guard (usernameTextField.text as String!) != nil else{
+            
+            self.warningLabel.isHidden = false
+            return
         }
-        guard let username = usernameTextField.text
-            else{
-                warningLabel.text = "Not a valid username."
-                warningLabel.isHidden = false
-                return
+        
+        guard (passwordTextField.text as String!) != nil else{
+            
+            self.warningLabel.isHidden = false
+            return
         }
-        guard password.characters.count > 5
-            else{
-                warningLabel.text = "Password must be more than 6 characters."
-                warningLabel.isHidden = false
-                return
+        
+        guard ((passwordTextField.text!.characters.count) as Int) > 5 else {
+            
+            self.warningLabel.isHidden = false
+            return
         }
-        self.dismiss(animated: true, completion: nil)
         
-        let postData = ["username": username, "password": password]
         
-        cloudTracker.postNetworkInformation(stringForJSON: postData, stringForUrl: urlString)
+        let postData = [
+            "username": usernameTextField.text ?? "",
+            "password": passwordTextField.text ?? ""
+        ]
         
-        self.dismiss(animated: true, completion: nil)
+        let defaults = UserDefaults.standard
+        let cloudTracker = CloudTrackerAPI()
+        
+        cloudTracker.post(data: postData as [String : AnyObject], toEndpoint: "signup", completion: {
+            
+            (completion:(data: Data?, error: NSError?)) in
+            guard let rawJSON = try? JSONSerialization.jsonObject(with: completion.data!, options: []) as! [String:[String:String]] else {
+                
+                print("data returned is not json, or not valid")
+                return
+            }
+            
+            defaults.set(rawJSON["user"], forKey: "user")
+            self.dismiss(animated: true, completion: nil)
+        })
     }
-
-    @IBAction func logInTapped(_ sender: UIButton) {  //log in button segues to LogIn VC
-        performSegue(withIdentifier: "LogIn", sender: self)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
 }

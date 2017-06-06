@@ -17,8 +17,8 @@ class Meal: NSObject, NSCoding {
     var name: String
     var photo: UIImage?
     var rating: Int
-    var calories: Int
-    var foodDescription: String
+//    var calories: Int
+//    var foodDescription: String
     
     //MARK: Archiving Paths
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -29,12 +29,12 @@ class Meal: NSObject, NSCoding {
         static let name = "name"
         static let photo = "photo"
         static let rating = "rating"
-        static let calories = "calories"
-        static let foodDescription = "description"
+//        static let calories = "calories"
+//        static let foodDescription = "description"
     }
     
     //Mark: Initialization
-    init?(name: String, photo: UIImage?, rating: Int, calories: Int, foodDescription: String) {
+    init?(name: String, photo: UIImage?, rating: Int) {
         //name must not be empty
         guard !name.isEmpty else{
             return nil
@@ -53,8 +53,8 @@ class Meal: NSObject, NSCoding {
         self.name = name
         self.photo = photo
         self.rating = rating
-        self.calories = calories
-        self.foodDescription = foodDescription
+//        self.calories = calories
+//        self.foodDescription = foodDescription
     }
     
     //MARK: NSCoding
@@ -62,8 +62,8 @@ class Meal: NSObject, NSCoding {
         aCoder.encode(name, forKey: PropertyKey.name)
         aCoder.encode(photo, forKey: PropertyKey.photo)
         aCoder.encode(rating, forKey: PropertyKey.rating)
-        aCoder.encode(calories, forKey: PropertyKey.calories)
-        aCoder.encode(description, forKey: PropertyKey.foodDescription)
+//        aCoder.encode(calories, forKey: PropertyKey.calories)
+//        aCoder.encode(description, forKey: PropertyKey.foodDescription)
     }
     
     required convenience init?(coder aDecoder: NSCoder){
@@ -78,16 +78,12 @@ class Meal: NSObject, NSCoding {
         
         let rating = aDecoder.decodeInteger(forKey: PropertyKey.rating)
         
-        let calories = aDecoder.decodeInteger(forKey: PropertyKey.calories)
-        
-        guard let foodDescription = aDecoder.decodeObject(forKey: PropertyKey.foodDescription) as? String
-            else{
-                os_log("Unable to decode the description for a Meal object.", log: OSLog.default, type: .debug)
-                return nil
-        }
+//        let calories = aDecoder.decodeInteger(forKey: PropertyKey.calories)
+//        
+//        guard let foodDescription = aDecoder.decodeObject(forKey: PropertyKey.foodDescription) as? String
         
         //must call designated initializer
-        self.init(name: name, photo: photo, rating: rating, calories: calories, foodDescription: foodDescription)
-    }
+        self.init(name: name, photo: photo, rating: rating)
     
+}
 }

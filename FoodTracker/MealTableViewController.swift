@@ -6,6 +6,7 @@
 //  Copyright © 2017 RushanBenazir. All rights reserved.
 //
 
+
 import UIKit
 import os.log
 
@@ -30,21 +31,15 @@ class MealTableViewController: UITableViewController {
         }
     }
     
-    //MARK: viewDidAppear
-    override func viewDidAppear(_ animated: Bool) {
-        let defaultUsers = UserDefaults.standard
+    //MARK: ViewWillAppear
+    override func viewWillAppear(_ animated: Bool) {
+        //loads any saved meals, otherwise loads the sample data
+        let defaults = UserDefaults.standard
         
-        let newDictionary = defaultUsers.object(forKey: "user") as! NSMutableDictionary
-        
-        let newToken = newDictionary.object(forKey: "token") as? String
-        
-        if(newToken == nil){
+        if defaults.dictionary(forKey: "user") == nil{
             performSegue(withIdentifier: "SignUp", sender: self)
-        }else{
-            print(newToken ?? "")
         }
     }
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -77,7 +72,7 @@ class MealTableViewController: UITableViewController {
         cell.nameLabel.text = meal.name
         cell.photoImageView.image = meal.photo
         cell.ratingControl.rating = meal.rating
-        cell.caloriesLabel.text = String(meal.calories)
+//        cell.caloriesLabel.text = String(meal.calories)
         
         return cell
     }
@@ -106,29 +101,39 @@ class MealTableViewController: UITableViewController {
      //MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        
         super.prepare(for: segue, sender: sender)
         
-        switch(segue.identifier ?? ""){
+        switch(segue.identifier ?? "") {
+            
         case "AddItem":
-                os_log("Adding a new meal.", log: OSLog.default, type: .debug)
+            os_log("Adding a new meal.", log: OSLog.default, type: .debug)
+            
         case "ShowDetail":
-            guard let mealDetailViewController = segue.destination as? ViewController
-                else{
-                    fatalError("Unexpected destination: \(segue.destination)")
+            guard let mealDetailViewController = segue.destination as? ViewController else {
+                fatalError("Unexpected destination: \(segue.destination)")
             }
-            guard let selectedMealCell = sender as? MealTableViewCell else{
-                fatalError("Unexpected sender: \(sender)")
+            
+            guard let selectedMealCell = sender as? MealTableViewCell else {
+                fatalError("Unexpected sender: \(String(describing: sender))")
             }
-            guard let indexPath = tableView.indexPath(for: selectedMealCell) else{
+            
+            guard let indexPath = tableView.indexPath(for: selectedMealCell) else {
                 fatalError("The selected cell is not being displayed by the table")
             }
+            
             let selectedMeal = meals[indexPath.row]
             mealDetailViewController.meal = selectedMeal
+            
+        case "SignUp":
+            break
+            
+        case "LogIn":
+            break
         default:
-            fatalError("Unexpected Segue Identifier: \(segue.identifier)")
+            fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
         }
     }
+    
     
 
     //MARK: Actions
@@ -160,17 +165,17 @@ class MealTableViewController: UITableViewController {
         let photo3 = UIImage(named: "meal3")
         
         //create three meal objects
-        guard let meal1 = Meal(name: "Caprese Salad", photo: photo1, rating: 1, calories: 520, foodDescription: "I hate salads.")
+        guard let meal1 = Meal(name: "Caprese Salad", photo: photo1, rating: 1)
             else{
             fatalError("Unable to instantiate meal1")
             
         }
-        guard let meal2 = Meal(name: "Chicken and Potatoes", photo: photo2, rating: 5, calories: 890, foodDescription: "I love chicken omg so amazing.")
+        guard let meal2 = Meal(name: "Chicken and Potatoes", photo: photo2, rating: 5)
             else {
             fatalError("Unable to instantiate meal2")
         }
         
-        guard let meal3 = Meal(name: "Pasta with Meatballs", photo: photo3, rating: 3, calories: 650, foodDescription: "It was alright...")
+        guard let meal3 = Meal(name: "Pasta with Meatballs", photo: photo3, rating: 3)
             else {
             fatalError("Unable to instantiate meal2")
         }

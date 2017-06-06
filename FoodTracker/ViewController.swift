@@ -39,8 +39,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
             nameTextField.text = meal.name
             photoImageView.image = meal.photo
             ratingControl.rating = meal.rating
-            caloriesTextField.text = String(meal.calories)
-            foodDescriptionTextField.text = meal.foodDescription
+//            caloriesTextField.text = String(meal.calories)
+//            foodDescriptionTextField.text = meal.foodDescription
         }
         
         //enable the save button only if the text field has a valid meal name
@@ -113,13 +113,21 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         let name = nameTextField.text ?? "" //nil coalescing operator
         let photo = photoImageView.image
         let rating = ratingControl.rating
-        let caloriesString = caloriesTextField.text ?? "0"
-            let calories = Int(caloriesString) ?? 0 //type cast calories from string to int
-        let foodDescription = foodDescriptionTextField.text ?? ""
+//        let caloriesString = caloriesTextField.text ?? "0"
+//            let calories = Int(caloriesString) ?? 0 //type cast calories from string to int
+//        let foodDescription = foodDescriptionTextField.text ?? ""
         
         //set the meal to be passed to the tablevc after the unwind segue
-        meal = Meal(name: name, photo: photo, rating: rating, calories: calories, foodDescription: foodDescription)
+        meal = Meal(name: name, photo: photo, rating: rating)
         
+        let ct = CloudTrackerAPI()
+        guard let upload = meal else{
+            return
+        }
+        ct.saveMeal(meal: upload, completion: {
+            (completion:(NSError?)) in
+            return
+        })
     }
     
     
